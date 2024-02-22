@@ -21,26 +21,24 @@ u32 Greedy(Grafo G, u32* Orden, u32* Color) {
     for (u32 i = 0; i < n; i++) {
         indiceVertice = Orden[i];
         
-        u32 colorVertice = 0;
         u32 gradoVertice = Grado(indiceVertice, G);
         u32 *coloresUsados = malloc(gradoVertice * sizeof(u32));
 
         for (u32 j = 0; j < gradoVertice; j++) {
             u32 indiceVecino = IndiceVecino(j, indiceVertice, G);
             u32 colorVecino = Color[indiceVecino];
-
             coloresUsados[j] = colorVecino;
         }
 
         qsort(coloresUsados, gradoVertice, sizeof(u32), cmpAsc);
 
+        u32 colorVertice = 0;
         for (u32 j = 0; j < gradoVertice; j++) {
             if (coloresUsados[j] == colorVertice)
                 colorVertice++;
         }
 
         Color[indiceVertice] = colorVertice;
-
         maxColor = max(maxColor, colorVertice);
 
         free(coloresUsados);

@@ -15,6 +15,7 @@ void InfoGrafo(Grafo G) {
 
 
 int main() {
+    printf("Construyendo grafo...\n\n");
     Grafo grafo = ConstruirGrafo();
     u32 n = NumeroDeVertices(grafo);
     u32 *Orden, *Color;
