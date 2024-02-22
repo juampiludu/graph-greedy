@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
-#include "APIParte3.h"
+#include "APIParte2.h"
 
 
 void InfoGrafo(Grafo G) {
@@ -26,21 +26,26 @@ int main() {
     Color = malloc(n * sizeof(u32));
     memset(Color, NULL_COLOR, n * sizeof(u32));
 
-    u32 p = 2;
-    printf("p seleccionado: %u\n", p);
-    
-
     OrdenNatural(n, Orden);
-
-    max_color = GreedyDinamico(grafo, Orden, Color, p);
-    printf("\nχ(G) = %u\n", max_color);
+    max_color = Greedy(grafo, Orden, Color);
+    printf("χ(G) = %u\n", max_color);
     printf("\n\n");
-    
-    SecondOrder(grafo, Orden, Color);
 
-    max_color = GreedyDinamico(grafo, Orden, Color, p);    
-    printf("\nχ(G) = %u\n", max_color);
+
+    // printf("\nOrden ImparPar\n\n");
+    // OrdenImparPar(n, Orden, Color);
+    // max_color = Greedy(grafo, Orden, Color);
+    // printf("χ(G) = %u\n", max_color);
+    // printf("\n\n");
+    // printArray(Orden, n);
+
+
+    printf("\nOrden Jedi\n\n");
+    OrdenJedi(grafo, Orden, Color);
+    max_color = Greedy(grafo, Orden, Color);
+    printf("χ(G) = %u\n", max_color);
     printf("\n\n");
+    // printArray(Orden, n);
 
     free(Orden);
     Orden = NULL;

@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "APIParte3.h"
+#include "APIParte2.h"
 
 
 char OrdenNatural(u32 n, u32 *Orden);

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "APIParte3.h"
+#include "APIParte2.h"
 
 // estructura para que sea mas facil hacer el cambio
 struct CuatroUpla{
@@ -43,7 +43,7 @@ int main() {
 
     
     for (u32 i = 0; i < 500; i++) {
-        //printf("i:%u\n",i);
+        printf("i:%u\n",i);
 
         // Cada 16 cambiamos
         if (i!=0 && i%16==0) {
