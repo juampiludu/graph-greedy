@@ -1,0 +1,8 @@
+.vscode/
+code/*.out
+code/*.o
+code/grafo
+code/.gdb_history
+grafos-de-practica/Harkon.txt
+grafos-de-practica/largecomplex4.txt
+grafos-de-practica/Octo.txt
