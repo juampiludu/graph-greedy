@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c99 -g
-SOURCES = main.c tupla.c EstructuraGrafo23.c ColoreoGrafo.c ArrayUtils.c
+SOURCES = main-prueba.c tupla.c EstructuraGrafo23.c ColoreoGrafo.c ArrayUtils.c
 OBJECTS = $(SOURCES:.c=.o)
 TARGET = grafo
 

@@ -43,7 +43,7 @@ int main() {
 
     
     for (u32 i = 0; i < 500; i++) {
-        printf("i:%u\n",i);
+        // printf("i:%u\n",i);
 
         // Cada 16 cambiamos
         if (i!=0 && i%16==0) {

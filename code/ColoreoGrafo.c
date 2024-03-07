@@ -13,37 +13,56 @@ u32 *LISTA_F;
 u32 Greedy(Grafo G, u32* Orden, u32* Color) {
     u32 n = NumeroDeVertices(G);
     u32 maxColor = 0;
-    
-    u32 indiceVertice = Orden[0];
-    
-    Color[indiceVertice] = 0;
+    u32 *result = malloc(n * sizeof(u32));
+    u32 *available = malloc(n * sizeof(u32));
 
-    for (u32 i = 0; i < n; i++) {
-        indiceVertice = Orden[i];
-        
-        u32 gradoVertice = Grado(indiceVertice, G);
-        u32 *coloresUsados = malloc(gradoVertice * sizeof(u32));
-
-        for (u32 j = 0; j < gradoVertice; j++) {
-            u32 indiceVecino = IndiceVecino(j, indiceVertice, G);
-            u32 colorVecino = Color[indiceVecino];
-            coloresUsados[j] = colorVecino;
-        }
-
-        qsort(coloresUsados, gradoVertice, sizeof(u32), cmpAsc);
-
-        u32 colorVertice = 0;
-        for (u32 j = 0; j < gradoVertice; j++) {
-            if (coloresUsados[j] == colorVertice)
-                colorVertice++;
-        }
-
-        Color[indiceVertice] = colorVertice;
-        maxColor = max(maxColor, colorVertice);
-
-        free(coloresUsados);
-        coloresUsados = NULL;
+    // lista de vertices coloreados
+    for (u32 u = 0; u < n; u++) {
+        result[u] = NULL_COLOR;
     }
+
+    // lista de vecinos coloreados
+    for (u32 cr = 0; cr < n; cr++) {
+        available[cr] = 0;
+    }
+
+    // recorremos todos los vertices en el orden dado
+    for (u32 i = 0; i < n; i++) {
+        u32 vertice = Orden[i];
+        u32 grado = Grado(vertice, G);
+
+        // recorremos todos los vecinos del vertice
+        for (u32 j = 0; j < grado; j++) {
+            u32 indiceVecino = IndiceVecino(j, vertice, G);
+            // si encontramos un vecino coloreado, lo marcamos
+            if (result[indiceVecino] != NULL_COLOR)
+                available[result[indiceVecino]] = 1;
+        }
+
+        // recorremos lista de vecinos colorados hasta encontrar el primer color disponible
+        u32 cr;
+        for (cr = 0; cr < n; cr++) {
+            if (available[cr] == 0)
+                break;
+        }
+
+        result[vertice] = cr;
+        Color[vertice] = cr;
+
+        // reseteamos lista de vecinos para la proxima iteracion
+        for (u32 j = 0; j < grado; j++) {
+            u32 indiceVecino = IndiceVecino(j, vertice, G);
+            if (result[indiceVecino] != NULL_COLOR)
+                available[result[indiceVecino]] = 0;
+        }
+
+        maxColor = max(cr, maxColor);
+    }
+
+    free(result);
+    result = NULL;
+    free(available);
+    available = NULL;
 
     return maxColor + 1;
 }
